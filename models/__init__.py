@@ -8,5 +8,4 @@ from models.sign import SignModel
 from models.app import AppModel
 from models.certificate import CertificateModel
 from models.drive import DriveModel
-from models.user_drive import UserDriveModel
 from models.inn import INNModel

@@ -1,3 +1,4 @@
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from models.base import BaseModel
@@ -14,5 +15,6 @@ class DriveModel(BaseModel):
     is_destroyed: Mapped[bool] = mapped_column(default=False)
     destroy_date: Mapped[str | None] = mapped_column(default=None)
     destroy_document: Mapped[str | None] = mapped_column(default=None)
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=True)
 
-    user = relationship("UserModel", secondary="user_drive", back_populates="drives")
+    user = relationship("UserModel", back_populates="drives")

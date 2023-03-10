@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Body
 
 from common.db import get_db
 from users.controller import user as user_controller
@@ -45,13 +45,3 @@ async def update_snils(snils_id: int, snils: SNILSBase, db=Depends(get_db)):
 @router.post("/passport/{passport_id}", response_model=Passport)
 async def update_passport(passport_id: int, passport: PassportBase, db=Depends(get_db)):
     return user_controller.update_passport(db=db, id=passport_id, passport=passport)
-
-
-@router.post("/drive")
-async def add_drive(drive_id: int, user_id: int, db=Depends(get_db)):
-    return user_controller.add_drive(db, drive_id, user_id)
-
-
-@router.delete("/drive")
-async def add_drive(drive_id: int, user_id: int, db=Depends(get_db)):
-    return user_controller.delete_drive(db, drive_id, user_id)

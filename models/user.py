@@ -16,7 +16,7 @@ class UserModel(BaseModel):
     INN_id: Mapped[int] = mapped_column(ForeignKey("inn.id"))
     SNILS_id: Mapped[int] = mapped_column(ForeignKey("snils.id"))
 
-    drives = relationship("DriveModel", secondary="user_drive", back_populates="user")
+    drives = relationship("DriveModel", back_populates="user")
     INN = relationship("INNModel", back_populates="user")
     SNILS = relationship("SNILSModel", back_populates="user")
     passport = relationship("PassportModel", back_populates="user")

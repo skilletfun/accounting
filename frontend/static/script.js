@@ -274,8 +274,8 @@ function createUser(user, passport_data, inn_data, snils_data, i, drives){
         {
             var li = document.createElement('li');
             li.className = "list-group-item";
-            li.textContent = drives[j];
-            ol.appendChild(p);
+            li.textContent = drives[j]["type"] + " " + drives[j]["number"];
+            ol.appendChild(li);
         }
         collapse.firstChild.appendChild(ol);
     }
@@ -335,7 +335,12 @@ function setUsersToModal(btn){
     xhr.onload = function(){
         var data = JSON.parse(this.responseText)["users"];
         var s = document.getElementById('userSelect');
+        s.setAttribute("drive-id", btn.parentElement.parentElement.firstChild.firstChild.value);
         s.replaceChildren();
+        var def_opt = document.createElement("option");
+        def_opt.value = "-1";
+        def_opt.textContent = "Не выбрано";
+        s.appendChild(def_opt);
         for (var i = 0; i < data.length; i++)
         {
             var obj = document.createElement("option");
@@ -348,7 +353,23 @@ function setUsersToModal(btn){
 }
 
 function addDriveToUser(){
-    console.log("click");
+    var value = document.getElementById('userSelect').value;
+    if (value != "-1")
+    {
+        var url = "http://0.0.0.0:8000/drives/user/?drive_id=" + document.getElementById('userSelect').getAttribute("drive-id") + "&user_id="+value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send();
+    }
+    else
+    {
+        var url = "http://0.0.0.0:8000/drives/user/?drive_id=" + document.getElementById('userSelect').getAttribute("drive-id");
+        var xhr = new XMLHttpRequest();
+        xhr.open("DELETE", url, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send();
+    }
 }
 
 function createEmptyDrive(){

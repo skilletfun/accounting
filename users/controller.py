@@ -54,13 +54,5 @@ class UserController(BaseController[UserModel]):
     def update_passport(self, db: Session, id: int, passport: PassportBase):
         return self.patch_model(db=db, model=PassportModel, id=id, values=passport)
 
-    def add_drive(self, db: Session, drive_id: int, user_id: int):
-        db.get(self.model, user_id).drives.append(db.get(DriveModel, drive_id))
-        db.commit()
-
-    def delete_drive(self, db: Session, drive_id: int, user_id: int):
-        db.get(self.model, user_id).drives.remove(db.get(DriveModel, drive_id))
-        db.commit()
-
 
 user = UserController(UserModel)

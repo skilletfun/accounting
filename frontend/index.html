@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Учет средств СКЗИ</title>
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome.css" rel="stylesheet">
+    <script src="/static/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+    <style>
+        .row { margin-bottom: 5px; }
+        .collapse{ margin-top: 5px; }
+    </style>
+</head>
+<body style="margin-left:50px;margin-right:50px;">
+    <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist" style="margin-top: 15px;">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#organizations" type="button" role="tab" aria-controls="organizations" aria-selected="true">Организации</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="false" onclick="loadUsers();">Работники</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#sings" type="button" role="tab" aria-controls="sings" aria-selected="false">ЭЦП</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#apps" type="button" role="tab" aria-controls="apps" aria-selected="false">ПО</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#drives" type="button" role="tab" aria-controls="drives" aria-selected="false" onclick="loadDrives();">Носители</button>
+        </li>
+    </ul>
+<hr>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="organizations" role="tabpanel" aria-labelledby="organizations-tab">...</div>
+      <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+
+      </div>
+      <div class="tab-pane fade" id="sings" role="tabpanel" aria-labelledby="sings-tab">...</div>
+      <div class="tab-pane fade" id="apps" role="tabpanel" aria-labelledby="apps-tab">...</div>
+      <div class="tab-pane fade" id="drives" role="tabpanel" aria-labelledby="drives-tab">...</div>
+    </div>
+    <button type="button" class="btn btn-outline-primary" style="position:fixed;bottom:0;right:0;margin-right:25px;margin-bottom:25px;" onclick="createEmptyEntity();">Создать</button>
+
+    <div class="modal fade" id="selectUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Выберите пользователя, которому выдан носитель</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select id="userSelect" class="form-select" aria-label="Выберите пользователя"></select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addDriveToUser();">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
